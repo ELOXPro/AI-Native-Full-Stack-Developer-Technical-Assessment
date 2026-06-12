@@ -4,7 +4,7 @@ An enterprise-ready, full-stack application built using the **T3 Stack** (Next.j
 
 ---
 
-## 🏗️ Architecture Diagram
+## Architecture Diagram
 
 Below is the conceptual flow of the application layers, illustrating how the client interface, API route handlers, PostgreSQL database, and self-hosted Ollama server interact:
 
@@ -35,7 +35,7 @@ graph TD
 
 ---
 
-## 🚀 How to Run the Project
+## How to Run the Project
 
 Follow these steps to set up and run the project locally on your machine.
 
@@ -76,7 +76,7 @@ Follow these steps to set up and run the project locally on your machine.
 
 ---
 
-## 🧠 How to Start Ollama & Model Choices
+## How to Start Ollama & Model Choices
 
 The application leverages a local self-hosted LLM clusters.
 
@@ -97,7 +97,7 @@ The application leverages a local self-hosted LLM clusters.
 
 ---
 
-## ⚖️ Trade-offs: `pgvector` vs `Float[]` (In-Memory Arrays)
+## Trade-offs: `pgvector` vs `Float[]` (In-Memory Arrays)
 
 During database capability checks, we verified that the `pgvector` extension was not pre-installed or supported in the PostgreSQL instance. To ensure high portability and seamless setup, we opted for storing embeddings in native PostgreSQL float arrays (`Float[]`).
 
@@ -114,7 +114,7 @@ During database capability checks, we verified that the `pgvector` extension was
 
 ---
 
-## 🛡️ Hallucination Handling (RAG Safety)
+## Hallucination Handling (RAG Safety)
 
 Retrieval-Augmented Generation (RAG) is prone to "hallucinations" (the model answering using its general pre-trained weights instead of your specific document context). We implement a multi-layered defense to enforce grounded answers:
 
@@ -134,7 +134,7 @@ Retrieval-Augmented Generation (RAG) is prone to "hallucinations" (the model ans
 
 ---
 
-## 🔍 Validation Strategy
+## Validation Strategy
 
 The system utilizes structural validation checks at both input and output boundaries:
 
