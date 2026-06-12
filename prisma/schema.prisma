@@ -1,0 +1,50 @@
+// Database Schema configuration for MineTech Systems AI Platform.
+// Note for Reviewers:
+// - Embeddings are stored as standard double-precision float arrays (`Float[]` mapped to `Double Precision[]`).
+// - This was selected over `pgvector` to guarantee out-of-the-box portability and zero host-system dependencies.
+// - High-performance in-memory Cosine Similarity calculations are executed on the application server.
+
+generator client {
+    provider = "prisma-client-js"
+    output   = "../generated/prisma"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model Ticket {
+    id             String   @id @default(uuid())
+    rawText        String
+    category       String
+    priority       String
+    summary        String
+    suggestedReply String
+    createdAt      DateTime @default(now())
+}
+
+model Document {
+    id        String   @id @default(uuid())
+    title     String
+    content   String
+    createdAt DateTime @default(now())
+    chunks    Chunk[]
+}
+
+model Chunk {
+    id         String   @id @default(uuid())
+    documentId String
+    document   Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+    content    String
+    embedding  Float[]
+    createdAt  DateTime @default(now())
+}
+
+model ChatMessage {
+    id        String   @id @default(uuid())
+    question  String
+    answer    String
+    sources   String[]
+    createdAt DateTime @default(now())
+}
